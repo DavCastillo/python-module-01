@@ -16,21 +16,18 @@ class Plant:
         self.plant_age += 1
 
 
-def ft_plant_growth() -> None:
-    growth = 0.0
-    days = 1
-    plant = Plant("Rose", 25, 30)
-    print("=== Garden Plant Growth ===")
-    plant.show()
-    for day in range(1, 8):
-        growth += 0.8
-        plant.grow()
-        plant.age()
-        print("=== Day", days, "===")
+def ft_plant_factory() -> None:
+    plant1 = Plant("Rose", 25.0, 30)
+    plant2 = Plant("Oak", 200.0, 365)
+    plant3 = Plant("Cactus", 5.0, 90)
+    plant4 = Plant("Sunflower", 80.0, 45)
+    plant5 = Plant("Fern", 15.0, 120)
+    plants = (plant1, plant2, plant3, plant4, plant5)
+    print("=== Plant Factory Output ===")
+    for plant in plants:
+        print("Created:", end=' ')
         plant.show()
-        days = days + 1
-    print("Growth this week:", growth)
 
 
 if __name__ == "__main__":
-    ft_plant_growth()
+    ft_plant_factory()
