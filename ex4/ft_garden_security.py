@@ -29,12 +29,6 @@ class Plant:
               self.get_age(), " days old", sep="")
         # print(f"{self.name}: {self.height}cm, {self.plant_age} days old")
 
-    def grow(self) -> None:
-        self.__height = self.__height + 0.8
-
-    def age(self) -> None:
-        self.__plant_age += 1
-
 
 def ft_garden_security() -> None:
     plant = Plant("Rose", 15.0, 10)
