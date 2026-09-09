@@ -62,8 +62,8 @@ class Tree(Plant):
 
     def produce_shade(self) -> None:
         print("Tree ", self.name, " now produces a shade of ",
-              self.get_height(), "cm long and ", self.trunk_diameter, " wide.",
-              sep='')
+              self.get_height(), "cm long and ",
+              self.trunk_diameter, "cm wide.", sep='')
 
     def show(self) -> None:
         print(self.name, ": ", round(self.get_height(), 2), "cm, ",
@@ -77,15 +77,24 @@ class Vegetable(Plant):
         name: str,
         height: float,
         age: int,
-        color: str
+        harvest_season: str,
+        nutritional_value: int
     ) -> None:
         super().__init__(name, height, age)
-        self.__color = color
+        self.harvest_season = harvest_season
+        self.nutritional_value = nutritional_value
+
+    def show(self) -> None:
+        print(self.name, ": ", round(self.get_height(), 2), "cm, ",
+              self.get_age(), " days old\n",
+              " Harvest season: ", self.harvest_season,
+              "\n Nutritional value: ", self.nutritional_value, sep="")
 
 
 def ft_plant_type() -> None:
     flower = Flower("Rose", 15.0, 10, "red")
     tree = Tree("Oak", 200.0, 365, 5.0)
+    vegetable = Vegetable("Tomato", 5.0, 10, "April", 0)
     print("=== Garden Plant Types ===")
     print("=== Flower")
     flower.show()
@@ -97,7 +106,9 @@ def ft_plant_type() -> None:
     tree.show()
     print("[asking the", tree.name, "to produce shade]")
     tree.produce_shade()
-
+    print("\n=== Vegetable")
+    vegetable.show()
+    print("[make", vegetable.name, "grow and age for 20 days]")
 
 
 if __name__ == "__main__":
