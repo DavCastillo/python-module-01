@@ -1,28 +1,28 @@
 class Plant:
     def __init__(self, name: str, height: float, plant_age: int) -> None:
         self.name: str = name
-        self.__height: float = height
-        self.__plant_age: int = plant_age
+        self._height: float = height
+        self._plant_age: int = plant_age
 
     def get_height(self) -> float:
-        return self.__height
+        return self._height
 
     def get_age(self) -> int:
-        return self.__plant_age
+        return self._plant_age
 
     def set_height(self, height: float) -> None:
         if height < 0:
             print(self.name + ": Error, height can't be negative")
             print("Height update rejected")
         else:
-            self.__height = height
+            self._height = height
 
     def set_age(self, plant_age: int) -> None:
         if plant_age < 0:
             print(self.name + ": Error, age can't be negative")
             print("Age update rejected")
         else:
-            self.__plant_age = plant_age
+            self._plant_age = plant_age
 
     def show(self) -> None:
         print(self.name, ": ", round(self.get_height(), 2), "cm, ",
