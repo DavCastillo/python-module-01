@@ -117,6 +117,8 @@ class Flower(Plant):
         print(self.get_name(), ": ", round(self.get_height(), 2), "cm, ",
               self.get_age(), " days old\n", " Color: ", self._color,
               "\n ", self._bloom_status, sep="")
+        self.get_data().add_show()
+
 
 
 class Tree(Plant):
@@ -129,16 +131,19 @@ class Tree(Plant):
     ) -> None:
         super().__init__(name, height, age)
         self._trunk_diameter = trunk_diameter
+        self._shade_calls = 0
 
     def produce_shade(self) -> None:
         print("Tree ", self.get_name(), " now produces a shade of ",
               self.get_height(), "cm long and ",
               self._trunk_diameter, "cm wide.", sep='')
+        self._shade_calls += 1
 
     def show(self) -> None:
         print(self.get_name(), ": ", round(self.get_height(), 2), "cm, ",
               self.get_age(), " days old\n",
               " Trunk diamter: ", self._trunk_diameter, "cm", sep="")
+        self.get_data().add_show()
 
 
 class Vegetable(Plant):
@@ -159,6 +164,7 @@ class Vegetable(Plant):
               self.get_age(), " days old\n",
               " Harvest season: ", self._harvest_season,
               "\n Nutritional value: ", self._nutritional_value, sep="")
+        self.get_data().add_show()
 
     def grow(self) -> None:
         super().grow()
@@ -179,6 +185,22 @@ class Seed(Flower):
         super().__init__(name, height, age, color, bloom_status)
         self._seeds = seeds
 
+    def show(self) -> None:
+        print(self.get_name(), ": ", round(self.get_height(), 2), "cm, ",
+              self.get_age(), " days old\n", " Color: ", self._color,
+              "\n ", self._bloom_status, " Seeds: ", self._seeds, sep="")
+        self.get_data().add_show()
+
+    def bloom(self):
+        super().bloom()
+        self._seeds = 42
+
+
+def show_statistics(plant: Plant | Tree) -> None:
+    if plant != Tree:
+        print("plant")
+    else:
+        print("Tree")
 
 def ft_garden_analytics() -> None:
     flower = Flower("Rose", 15.0, 10, "red", "has not bloomed yet")
@@ -204,6 +226,8 @@ def ft_garden_analytics() -> None:
     vegetable.grow()
     vegetable.aging()
     vegetable.show()
+
+    show_statistics(flower)
 
 
 if __name__ == "__main__":
