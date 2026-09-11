@@ -1,4 +1,34 @@
 class Plant:
+
+    class Data:
+        def __init__(
+            self,
+            grow_count: int,
+            age_count: int,
+            show_count: int
+        ) -> None:
+            self._grow_count = grow_count
+            self._age_count = age_count
+            self._show_count = show_count
+
+        def add_grow(self) -> None:
+            self._grow_count += 1
+
+        def add_age(self) -> None:
+            self._age_count += 1
+
+        def add_show(self) -> None:
+            self._show_count += 1
+
+        def get_grow_count(self) -> int:
+            return self._grow_count
+
+        def get_age_count(self) -> int:
+            return self._age_count
+
+        def get_show_count(self) -> int:
+            return self._show_count
+
     def __init__(self, name: str, height: float, age: int) -> None:
         self._name = name
         if height > 0.0:
@@ -13,6 +43,7 @@ class Plant:
             self._age = 1
             print(self._name + ": Error, age can't be negative")
             print("Age set to 1")
+        self._data = Plant.Data(0, 0, 0)
 
     def get_name(self) -> str:
         return self._name
@@ -22,6 +53,9 @@ class Plant:
 
     def get_age(self) -> int:
         return self._age
+
+    def get_data(self) -> Data:
+        return self._data
 
     def set_height(self, height: float) -> None:
         if height < 0:
@@ -40,13 +74,27 @@ class Plant:
     def show(self) -> None:
         print(self.get_name(), ": ", round(self.get_height(), 2), "cm, ",
               self.get_age(), " days old", sep="")
+        self.get_data().add_show()
         # print(f"{self.get_name()}: {self.height}cm, {self.age} days old")
 
     def grow(self) -> None:
         self.set_height(self._height + 0.8)
+        self.get_data().add_grow()
 
     def aging(self) -> None:
         self.set_age(self._age + 1)
+        self.get_data().add_age()
+
+    @classmethod
+    def create_anon_plant(cls, height: float, age: int) -> "Plant":
+        return cls("Unknown plant", height, age)
+
+    @staticmethod
+    def check_age(age: int) -> None:
+        if age < 365:
+            print("Is", age, "days more than a year? -> False")
+        else:
+            print("Is", age, "days more than a year? -> True")
 
 
 class Flower(Plant):
@@ -55,17 +103,20 @@ class Flower(Plant):
         name: str,
         height: float,
         age: int,
-        color: str
+        color: str,
+        bloom_status: str
     ) -> None:
         super().__init__(name, height, age)
         self._color = color
+        self._bloom_status = self._name + bloom_status
 
     def bloom(self) -> None:
-        print("", self.get_name(), "is blooming beautifully!")
+        self._bloom_status = self.get_name() + "is blooming beautifully"
 
     def show(self) -> None:
         print(self.get_name(), ": ", round(self.get_height(), 2), "cm, ",
-              self.get_age(), " days old\n", " Color: ", self._color, sep="")
+              self.get_age(), " days old\n", " Color: ", self._color,
+              "\n ", self._bloom_status, sep="")
 
 
 class Tree(Plant):
@@ -110,12 +161,27 @@ class Vegetable(Plant):
               "\n Nutritional value: ", self._nutritional_value, sep="")
 
     def grow(self) -> None:
-        self.set_height(self.get_height() + 2.1)
+        super().grow()
+        self.set_height(self.get_height() + 1.3)
         self._nutritional_value += 1
 
 
-def ft_plant_type() -> None:
-    flower = Flower("Rose", 15.0, 10, "red")
+class Seed(Flower):
+    def __init__(
+        self,
+        name: str,
+        height: float,
+        age: int,
+        color: str,
+        bloom_status: str,
+        seeds: int,
+    ) -> None:
+        super().__init__(name, height, age, color, bloom_status)
+        self._seeds = seeds
+
+
+def ft_garden_analytics() -> None:
+    flower = Flower("Rose", 15.0, 10, "red", "has not bloomed yet")
     tree = Tree("Oak", 200.0, 365, 5.0)
     vegetable = Vegetable("Tomato", 5.0, 10, "April", 0)
 
@@ -135,11 +201,10 @@ def ft_plant_type() -> None:
     print("\n=== Vegetable")
     vegetable.show()
     print("[make", vegetable.get_name(), "grow and age for 20 days]")
-    for _ in range(20):
-        vegetable.grow()
-        vegetable.aging()
+    vegetable.grow()
+    vegetable.aging()
     vegetable.show()
 
 
 if __name__ == "__main__":
-    ft_plant_type()
+    ft_garden_analytics()
