@@ -139,6 +139,9 @@ class Tree(Plant):
               self._trunk_diameter, "cm wide.", sep='')
         self._shade_calls += 1
 
+    def get_shade_calls(self) -> int:
+        return self._shade_calls
+
     def show(self) -> None:
         print(self.get_name(), ": ", round(self.get_height(), 2), "cm, ",
               self.get_age(), " days old\n",
@@ -197,15 +200,18 @@ class Seed(Flower):
 
 
 def show_statistics(plant: Plant | Tree) -> None:
+    print("Stats: ", plant.get_data().get_grow_count(), " grow, ",
+          plant.get_data().get_age_count(), " age, ",
+          plant.get_data().get_show_count(), " show", sep="")
     if plant != Tree:
-        print("plant")
+        print("hey")
     else:
-        print("Tree")
+        print(plant.get_shade_calls(), "shade")
 
 def ft_garden_analytics() -> None:
-    flower = Flower("Rose", 15.0, 10, "red", "has not bloomed yet")
-    tree = Tree("Oak", 200.0, 365, 5.0)
-    vegetable = Vegetable("Tomato", 5.0, 10, "April", 0)
+    flower: Flower = Flower("Rose", 15.0, 10, "red", "has not bloomed yet")
+    tree: Tree = Tree("Oak", 200.0, 365, 5.0)
+    vegetable: Vegetable = Vegetable("Tomato", 5.0, 10, "April", 0)
 
     print("=== Garden Plant Types ===")
     print("=== Flower")
@@ -219,6 +225,7 @@ def ft_garden_analytics() -> None:
     tree.show()
     print("[asking the", tree.get_name(), "to produce shade]")
     tree.produce_shade()
+    show_statistics(tree)
 
     print("\n=== Vegetable")
     vegetable.show()
