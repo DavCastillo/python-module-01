@@ -57,6 +57,9 @@ class Plant:
     def get_data(self) -> Data:
         return self._data
 
+    def get_extra_data(self) -> int:
+        return 0
+
     def set_height(self, height: float) -> None:
         if height < 0:
             print(self.get_name() + ": Error, height can't be negative")
@@ -138,7 +141,7 @@ class Tree(Plant):
               self._trunk_diameter, "cm wide.", sep='')
         self._shade_calls += 1
 
-    def get_shade_calls(self) -> int:
+    def get_extra_data(self) -> int:
         return self._shade_calls
 
     def show(self) -> None:
@@ -198,12 +201,12 @@ class Seed(Flower):
         self._seeds = 42
 
 
-def show_statistics(plant: Plant | Tree) -> None:
+def show_statistics(plant: Plant) -> None:
     print("Stats: ", plant.get_data().get_grow_count(), " grow, ",
           plant.get_data().get_age_count(), " age, ",
           plant.get_data().get_show_count(), " show", sep="")
     if plant.__class__.__name__ == "Tree":
-        print("", plant.get_shade_calls(), "shade")
+        print("", plant.get_extra_data(), "shade")
     else:
         print()
 
