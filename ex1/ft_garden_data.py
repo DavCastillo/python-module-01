@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 class Plant:
     def __init__(self, name: str, height: int, age: int) -> None:
         self.name = name
@@ -7,7 +9,6 @@ class Plant:
     def show(self) -> None:
         print(self.name, ": ", self.height, "cm, ",
               self.age, " days old", sep="")
-        # print(f"{self.name}: {self.height}cm, {self.age} days old")
 
 
 def ft_garden_data() -> None:

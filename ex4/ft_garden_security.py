@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 class Plant:
     def __init__(self, name: str, height: float, plant_age: int) -> None:
         self.name = name
@@ -6,19 +8,13 @@ class Plant:
         else:
             self._height = 1.0
             print(self.name + ": Error, height can't be negative")
-            print("Height set to 1.0")
+            print("Height set to defaut")
         if plant_age > 0:
             self._plant_age = plant_age
         else:
             self._plant_age = 1
             print(self.name + ": Error, age can't be negative")
-            print("Age set to 1")
-
-    def get_height(self) -> float:
-        return self._height
-
-    def get_age(self) -> int:
-        return self._plant_age
+            print("Age set to default")
 
     def set_height(self, height: float) -> None:
         if height < 0:
@@ -33,6 +29,12 @@ class Plant:
             print("Age update rejected")
         else:
             self._plant_age = plant_age
+
+    def get_height(self) -> float:
+        return self._height
+
+    def get_age(self) -> int:
+        return self._plant_age
 
     def show(self) -> None:
         print(self.name, ": ", round(self.get_height(), 2), "cm, ",
