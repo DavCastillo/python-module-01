@@ -39,7 +39,6 @@ class Plant:
     def show(self) -> None:
         print(self.name, ": ", round(self.get_height(), 2), "cm, ",
               self.get_age(), " days old", sep="")
-        # print(f"{self.name}: {self.height}cm, {self.plant_age} days old")
 
 
 def ft_garden_security() -> None:

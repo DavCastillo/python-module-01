@@ -42,7 +42,6 @@ class Plant:
     def show(self) -> None:
         print(self.get_name(), ": ", round(self.get_height(), 2), "cm, ",
               self.get_age(), " days old", sep="")
-        # print(f"{self.get_name()}: {self.height}cm, {self.age} days old")
 
     def grow(self) -> None:
         self.set_height(self._height + 0.8)
